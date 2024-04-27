@@ -1,5 +1,5 @@
-//¿øº» ÃâÃ³ https://codingwell.tistory.com/60
-//ÀÚ¼¼ÇÑ ³»¿ë ¾Ë°í½ÍÀ¸¸é ¿øº» Âü°í
+//ì›ë³¸ ì¶œì²˜ https://codingwell.tistory.com/60
+//ìì„¸í•œ ë‚´ìš© ì•Œê³ ì‹¶ìœ¼ë©´ ì›ë³¸ ì°¸ê³ 
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
 #include <string>
@@ -17,8 +17,7 @@ int main()
 	string dir,cha;
 
 	VideoCapture video(0);
-	//VideoCapture video("input.mp4");
-	if (!video.isOpened()) { cout << "µ¿¿µ»óÀ» ¿­ ¼ö ¾øÀ½\n"; return -1; }
+	if (!video.isOpened()) { cout << "ë™ì˜ìƒì„ ì—´ ìˆ˜ ì—†ìŒ\n"; return -1; }
 
 
 	video.read(img_frame);
@@ -38,13 +37,13 @@ int main()
 		cvtColor(img_filter, img_filter, COLOR_BGR2GRAY);
 
 
-		Canny(img_filter, img_edges, 70, 100); //img_edges´Â Ä³´Ï¿¡Áö ÈÄ¿¡ »ı±ä ÀÌ¹ÌÁö
+		Canny(img_filter, img_edges, 70, 100); //img_edgesëŠ” ìºë‹ˆì—ì§€ í›„ì— ìƒê¸´ ì´ë¯¸ì§€
 
 
-		img_mask = roadLaneDetector.limit_region(img_edges);//°ü½É¿µ¿ª ÁöÁ¤ÇÑ°Å(ÆÄ¶õ»ö)°ú Ä³´Ï¿¡Áö ºñÆ®¿ÍÀÌÁî ¾Øµå ÇÑ°Å.
+		img_mask = roadLaneDetector.limit_region(img_edges);//ê´€ì‹¬ì˜ì—­ ì§€ì •í•œê±°(íŒŒë€ìƒ‰)ê³¼ ìºë‹ˆì—ì§€ ë¹„íŠ¸ì™€ì´ì¦ˆ ì•¤ë“œ í•œê±°.
 
 
-		lines = roadLaneDetector.houghLines(img_mask);//ÇãÇÁº¯È¯
+		lines = roadLaneDetector.houghLines(img_mask);//í—ˆí”„ë³€í™˜
 
 		if (lines.size() > 0) {
 
