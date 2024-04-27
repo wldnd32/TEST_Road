@@ -16,7 +16,7 @@ int main()
 	vector<Point> lane;
 	string dir,cha;
 
-	VideoCapture video(0);
+	VideoCapture video(0);//카메라 사용. 
 	if (!video.isOpened()) { cout << "동영상을 열 수 없음\n"; return -1; }
 
 
