@@ -1,6 +1,6 @@
-//¿øº» ÃâÃ³ https://codingwell.tistory.com/60
-//¿øº» ±êÇãºêÁÖ¼Ò https://github.com/choijoohee213/OpenCV_Road_Lane_Detection
-//ÀÚ¼¼ÇÑ ³»¿ë ¾Ë°í½ÍÀ¸¸é ¿øº» È®ÀÎ
+//ì›ë³¸ ì¶œì²˜(ì„¤ëª…) https://codingwell.tistory.com/60
+//ì›ë³¸ ê¹ƒí—ˆë¸Œì£¼ì†Œ https://github.com/choijoohee213/OpenCV_Road_Lane_Detection
+//ìì„¸í•œ ë‚´ìš© ì•Œê³ ì‹¶ìœ¼ë©´ ì›ë³¸ í™•ì¸
 #include "opencv2/opencv.hpp"
 #include <opencv2/highgui/highgui.hpp>
 #include "RoadLaneDetector.h"
@@ -34,7 +34,7 @@ Mat RoadLaneDetector::filter_colors(Mat img_frame) {
 	//bitwise_and(output, output, yellow_image, yellow_mask);
 
 
-	//addWeighted(white_image, 1.0, yellow_image, 1.0, 0.0, output);//Â÷¼± Èò»ö + Â÷¼± ³ë¶õ»öÀÌ outputÀÌ´Ù. ±×°Å¸¦ ¸®ÅÏ = img_filter
+	//addWeighted(white_image, 1.0, yellow_image, 1.0, 0.0, output);//ì°¨ì„  í°ìƒ‰ + ì°¨ì„  ë…¸ë€ìƒ‰ì´ outputì´ë‹¤. ê·¸ê±°ë¥¼ ë¦¬í„´ = img_filter
 	return output;
 }
 
@@ -67,7 +67,7 @@ Mat RoadLaneDetector::limit_region(Mat img_edges) {
 
 
 	bitwise_and(img_edges, mask, output);
-	return output; //zeros ÀÌ¹ÌÁö¿¡ °ü½É¿µ¿ª ÁöÁ¤Çß´ø°÷ ÆÄ¶õ»öÀ¸·Î Ã¤¿ò.±×°Å¸¦ mask¶ó°í ÇÏ°í, ±× ÈÄ Ä³´Ï¿¡ÁöÇß´ø ÀÌ¹ÌÁö¶û mask¸¦ ºñÆ®¿ÍÀÌÁî ¾Øµå ÇÑ´Ù. ±×°Å¸¦ outputÀÌ¶óÇÏ°í ±×°É ¸®ÅÏ ±×°Ô img_maskÀÓ.
+	return output; //zeros ì´ë¯¸ì§€ì— ê´€ì‹¬ì˜ì—­ ì§€ì •í–ˆë˜ê³³ íŒŒë€ìƒ‰ìœ¼ë¡œ ì±„ì›€.ê·¸ê±°ë¥¼ maskë¼ê³  í•˜ê³ , ê·¸ í›„ ìºë‹ˆì—ì§€í–ˆë˜ ì´ë¯¸ì§€ë‘ maskë¥¼ ë¹„íŠ¸ì™€ì´ì¦ˆ ì•¤ë“œ í•œë‹¤. ê·¸ê±°ë¥¼ outputì´ë¼í•˜ê³  ê·¸ê±¸ ë¦¬í„´ ê·¸ê²Œ img_maskì„.
 }
 
 vector<Vec4i> RoadLaneDetector::houghLines(Mat img_mask) {
@@ -123,14 +123,14 @@ vector<vector<Vec4i>> RoadLaneDetector::separateLine(Mat img_edges, vector<Vec4i
 	output[0] = right_lines;
 	output[1] = left_lines;
 	return output;
-}//¿ì¼±, ÇãÇÁº¯È¯À¸·Î ¼±ºĞÀ» ±¸Çß°í, Vec4i line = lines[i]; ÀÌ°Å¸¦ ÀÌ¿ëÇØ¼­ ¼±ºĞ ³¡Á¡ÀÇ (x1,y1),(x2,y2)¸¦ ±¸Çß´Ù.
-// ±× ÈÄ, ±â¿ï±â Àı´ñ°ªÀÌ slope_thresh¸¦ ³ÑÀ¸¸é ¼±ºĞÀ¸·Î ÀÎÁ¤.
-//±× Á÷¼±ÀÌ ¾ç¼öÀÌ°í, x1,x2°¡ µÑ´Ù 0º¸´Ù Å©¸é ¿À¸¥ÂÊ ¼±ºĞ,output[0]
-//±× Á÷¼±ÀÌ À½¼öÀÌ°í, x1,x2°¡ µÑ´Ù 0º¸´Ù ÀÛÀ¸¸é ¿ŞÂÊ ¼±ºĞ,output[1]À¸·Î º¸°Ú´Ù. ±× ÈÄ output¸®ÅÏ.
+}//ìš°ì„ , í—ˆí”„ë³€í™˜ìœ¼ë¡œ ì„ ë¶„ì„ êµ¬í–ˆê³ , Vec4i line = lines[i]; ì´ê±°ë¥¼ ì´ìš©í•´ì„œ ì„ ë¶„ ëì ì˜ (x1,y1),(x2,y2)ë¥¼ êµ¬í–ˆë‹¤.
+// ê·¸ í›„, ê¸°ìš¸ê¸° ì ˆëŒ“ê°’ì´ slope_threshë¥¼ ë„˜ìœ¼ë©´ ì„ ë¶„ìœ¼ë¡œ ì¸ì •.
+//ê·¸ ì§ì„ ì´ ì–‘ìˆ˜ì´ê³ , x1,x2ê°€ ë‘˜ë‹¤ 0ë³´ë‹¤ í¬ë©´ ì˜¤ë¥¸ìª½ ì„ ë¶„,output[0]
+//ê·¸ ì§ì„ ì´ ìŒìˆ˜ì´ê³ , x1,x2ê°€ ë‘˜ë‹¤ 0ë³´ë‹¤ ì‘ìœ¼ë©´ ì™¼ìª½ ì„ ë¶„,output[1]ìœ¼ë¡œ ë³´ê² ë‹¤. ê·¸ í›„ outputë¦¬í„´.
 
 
 vector<Point> RoadLaneDetector::regression(vector<vector<Vec4i>> separatedLines, Mat img_input) {
-	//ÇãÇÁº¯È¯ ÈÄ, ¾ç³¡ Á¡ÀÇ ÁÂÇ¥°ªÀÌ ³ª¿ÔÀ¸´Ï ±× Á¡µéÀ» ÀÌ¿ëÇÏ¿© ¿ŞÂÊ ¶óÀÎ ,¿À¸¥ÂÊ ¶óÀÎÀ¸·Î ³ª´©°Ú´Ù´Â ³»¿ë
+	//í—ˆí”„ë³€í™˜ í›„, ì–‘ë ì ì˜ ì¢Œí‘œê°’ì´ ë‚˜ì™”ìœ¼ë‹ˆ ê·¸ ì ë“¤ì„ ì´ìš©í•˜ì—¬ ì™¼ìª½ ë¼ì¸ ,ì˜¤ë¥¸ìª½ ë¼ì¸ìœ¼ë¡œ ë‚˜ëˆ„ê² ë‹¤ëŠ” ë‚´ìš©
 	vector<Point> output(4);
 	Point p1, p2, p3, p4;
 	Vec4d left_line, right_line;
@@ -169,10 +169,10 @@ vector<Point> RoadLaneDetector::regression(vector<vector<Vec4i>> separatedLines,
 
 			left_m = left_line[1] / left_line[0];
 			left_b = Point(left_line[2], left_line[3]);
-		}//¿ŞÂÊ¶óÀÎ, ¿À¸¥ÂÊ¶óÀÎÀ¸·Î ³ª´©°í ³ª¼­ fitLineÇÔ¼ö »ç¿ëÇØ¼­ Á÷¼±À» ±×¸®±â À§ÇÑ ±â¿ï±â°ªÀÌ¶û ÁÂÇ¥°ªÀ» ¾Ë ¼ö ÀÖ´Ù.
-	}//separatedLines[0]Àº ¿À¸¥ÂÊ ¼±ºĞÀ» ÀÇ¹ÌÇÏ°í, ¼±ºĞ ¾ç ³¡Á¡ÀÇ ÁÂÇ¥Á¤º¸¸¦ °¡Áö°í ÀÖ´Âµ¥, ±× Á¡µéÀÌ ¿©·¯°³ ¸ğ¿©ÀÖ´Â °÷¿¡¼­ fitLine ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ÃÖÀûÀÇ ¼±ºĞÀ» °ñ¶ó³» ÁØ´Ù.
-	//separatedLines[1]Àº ¿ŞÂÊ ¼±ºĞÀ» ÀÇ¹ÌÇÏ°í, ¼±ºĞ ¾ç ³¡Á¡ÀÇ ÁÂÇ¥Á¤º¸¸¦ °¡Áö°í ÀÖ´Âµ¥, ±× Á¡µéÀÌ ¿©·¯°³ ¸ğ¿©ÀÖ´Â °÷¿¡¼­ fitLine ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ÃÖÀûÀÇ ¼±ºĞÀ» °ñ¶ó³» ÁØ´Ù.
-//±× Á¡µé Áß¿¡ ¼±ÅÃµÈ ½ÃÀÛÁ¡°ú ³¡Á¡¿¡ µû¶ó¼­ Á÷¼±ÀÌ Áß±¸³­¹æÀ¸·Î »ı±â°Ô µÉ ¼öµµ ÀÖ´Ù.
+		}//ì™¼ìª½ë¼ì¸, ì˜¤ë¥¸ìª½ë¼ì¸ìœ¼ë¡œ ë‚˜ëˆ„ê³  ë‚˜ì„œ fitLineí•¨ìˆ˜ ì‚¬ìš©í•´ì„œ ì§ì„ ì„ ê·¸ë¦¬ê¸° ìœ„í•œ ê¸°ìš¸ê¸°ê°’ì´ë‘ ì¢Œí‘œê°’ì„ ì•Œ ìˆ˜ ìˆë‹¤.
+	}//separatedLines[0]ì€ ì˜¤ë¥¸ìª½ ì„ ë¶„ì„ ì˜ë¯¸í•˜ê³ , ì„ ë¶„ ì–‘ ëì ì˜ ì¢Œí‘œì •ë³´ë¥¼ ê°€ì§€ê³  ìˆëŠ”ë°, ê·¸ ì ë“¤ì´ ì—¬ëŸ¬ê°œ ëª¨ì—¬ìˆëŠ” ê³³ì—ì„œ fitLine í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ìµœì ì˜ ì„ ë¶„ì„ ê³¨ë¼ë‚´ ì¤€ë‹¤.
+	//separatedLines[1]ì€ ì™¼ìª½ ì„ ë¶„ì„ ì˜ë¯¸í•˜ê³ , ì„ ë¶„ ì–‘ ëì ì˜ ì¢Œí‘œì •ë³´ë¥¼ ê°€ì§€ê³  ìˆëŠ”ë°, ê·¸ ì ë“¤ì´ ì—¬ëŸ¬ê°œ ëª¨ì—¬ìˆëŠ” ê³³ì—ì„œ fitLine í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ìµœì ì˜ ì„ ë¶„ì„ ê³¨ë¼ë‚´ ì¤€ë‹¤.
+//ê·¸ ì ë“¤ ì¤‘ì— ì„ íƒëœ ì‹œì‘ì ê³¼ ëì ì— ë”°ë¼ì„œ ì§ì„ ì´ ì¤‘êµ¬ë‚œë°©ìœ¼ë¡œ ìƒê¸°ê²Œ ë  ìˆ˜ë„ ìˆë‹¤.
 	int y1 = img_input.rows;
 	int y2 = 400;
 
@@ -182,12 +182,12 @@ vector<Point> RoadLaneDetector::regression(vector<vector<Vec4i>> separatedLines,
 	double left_x1 = ((y1 - left_b.y) / left_m) + left_b.x;
 	double left_x2 = ((y2 - left_b.y) / left_m) + left_b.x;
 
-	output[0] = Point(right_x1, y1);//¶óÀÎ±×¸±¶§ »ç¿ëµÇ´Â ÁÂÇ¥µé
+	output[0] = Point(right_x1, y1);//ë¼ì¸ê·¸ë¦´ë•Œ ì‚¬ìš©ë˜ëŠ” ì¢Œí‘œë“¤
 	output[1] = Point(right_x2, y2);
 	output[2] = Point(left_x1, y1);
 	output[3] = Point(left_x2, y2);
-	//ÀÌ¹ÌÁö Á¦ÀÏ ¾Æ·¡¿¡ ÀÖ´Â Á¡ÀÇ ÁÂÇ¥¿Í ³»°¡ ¿øÇÏ´Â ºÎºĞ(y°ªÀ» ÀÌ¿ëÇÏ¿©)ÀÇ Á¡ÀÇ ÁÂÇ¥¸¦ ±¸ÇÔ
-	return output;//±×¸®°í ±×°É ¸®ÅÏ. ±×°Ô lane
+	//ì´ë¯¸ì§€ ì œì¼ ì•„ë˜ì— ìˆëŠ” ì ì˜ ì¢Œí‘œì™€ ë‚´ê°€ ì›í•˜ëŠ” ë¶€ë¶„(yê°’ì„ ì´ìš©í•˜ì—¬)ì˜ ì ì˜ ì¢Œí‘œë¥¼ êµ¬í•¨
+	return output;//ê·¸ë¦¬ê³  ê·¸ê±¸ ë¦¬í„´. ê·¸ê²Œ lane
 }
 
 string RoadLaneDetector::predictDir() {
@@ -197,7 +197,7 @@ string RoadLaneDetector::predictDir() {
 	int y1 = img_input.rows;
 	int y2 = 450;
 
-	x = (double)(((right_m * right_b.x) - (left_m * left_b.x) - right_b.y + left_b.y) / (right_m - left_m));//¼Ò½ÇÁ¡ ±¸ÇÏ±â
+	x = (double)(((right_m * right_b.x) - (left_m * left_b.x) - right_b.y + left_b.y) / (right_m - left_m));//ì†Œì‹¤ì  êµ¬í•˜ê¸°
 	double right_x2 = ((y2 - right_b.y) / right_m) + right_b.x;
 	double left_x2 = ((y2 - left_b.y) / left_m) + left_b.x;
 	double right_x1 = ((y1 - right_b.y) / right_m) + right_b.x;
@@ -232,7 +232,7 @@ Mat RoadLaneDetector::drawLine(Mat img_input, vector<Point> lane, string dir) {
 	addWeighted(output, 0.3, img_input, 0.7, 0, img_input);
 
 	putText(img_input, dir, Point(100, 100), FONT_HERSHEY_COMPLEX, 2, Scalar(255, 255, 255), 3, LINE_AA);
-	//Point(100, 100)¿©±â¼­ Point´Â ÅØ½ºÆ®ÀÇ ¿ŞÂÊ ÇÏ´Ü ¸ğ¼­¸®ÀÇ À§Ä¡¸¦ ¸»ÇÔ.
+	//Point(100, 100)ì—¬ê¸°ì„œ PointëŠ” í…ìŠ¤íŠ¸ì˜ ì™¼ìª½ í•˜ë‹¨ ëª¨ì„œë¦¬ì˜ ìœ„ì¹˜ë¥¼ ë§í•¨.
 	line(img_input, lane[0], lane[1], Scalar(255, 0, 255), 5, LINE_AA);
 	line(img_input, lane[2], lane[3], Scalar(255, 0, 255), 5, LINE_AA);
 	circle(img_input, Point(410,400), 3, Scalar(255, 255, 255), FILLED);
